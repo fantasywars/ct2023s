@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- D3, jquery -->
+  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" charset="utf-8"></script>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- CSS -->
+  <link href="css/mystyle.css" rel="stylesheet">
+
+  <title>作品集 Portfolio</title>
+  <style type="text/css">
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200&display=swap');
+
+    table {
+    border-collapse: collapse;
+    border: 2px solid white; /* rgba(217,140,144,1) */
+    font-size:  12pt;
+    margin-left: auto;
+    margin-right: auto;
+    }
+
+    td,
+    th {
+    border: 1px solid white;
+    padding: 2px 8px;
+    }
+
+    .flipswitch
+    {
+        position: relative;
+        background: white;
+        width: 120px;
+        height: 20px;
+        -webkit-appearance: initial;
+        border-radius: 3px;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        outline:none;
+        font-size: 14px;
+        font-family: Trebuchet, Arial, sans-serif;
+        font-weight: bold;
+        cursor:pointer;
+        border:1px solid #ddd;
+    }
+    .flipswitch:after
+    {
+        position:absolute;
+        top:5%;
+        display:block; 
+        line-height:16px;
+        width:45%;
+        height:90%;
+        background:#fff;
+        box-sizing:border-box;
+        text-align:center;
+        transition: all 0.3s ease-in 0s; 
+        color:rgba(159,53,58,1);
+        border:#888 1px solid;
+        border-radius:3px;
+    }
+    .flipswitch:after
+    {
+        left:2%;
+        content: "未完成";
+    }
+    .flipswitch:checked:after
+    {
+        left:53%;
+        content: "完成";
+    }
+
+    body {
+      background-color: rgb(106, 76, 156); /* #6A4C9C */
+      color: rgb(106, 76, 156);
+      font-family: 'Noto Serif JP', serif;
+    }
+
+    .container-fluid {
+      width:  90%;
+    }
+
+    .hw12 {
+      border: 1px solid rgb(159, 53, 58);
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+
+    .twenty {
+      border: 1px solid #f9eced;
+      color: #f9eced;
+      padding: 8px;
+      font-size: 16pt;
+    }
+
+    .twenty:hover {
+        box-shadow: 0 0 5px 3px #f9eced;
+        color: cyan; 
+        text-shadow: 0 0 6px #FFFFFF, 0 0 6px #000000;
+    }
+  </style>
+  </head>
+  <body>
+
+  <div class="container-fluid">
+
+    <!-- ------------------------------------------------>
+    <div class="row hw12">
+      <div class="col-md-12 twenty">
+        <h1 style="font-family: OFont; font-size: 60px;">Homework 04</h1>
+      </div>
+    </div>
+
+    <!-- ------------------------------------------------>
+    <div class="row hw12">
+      <div class="col-md-12 twenty">
+        打開src資料夾
+        <input type="button" name="back" onclick="location.href='https://github.com/Wenshin1109/ct2023s/tree/main/hw04/src'" value="按我٩(｡・ω・｡)و">
+      </div>
+    </div>
+
+    <!-- ------------------------------------------------>
+    <div class="row hw12">
+      <div class="col-md-12 twenty">
+        心得<br>
+        在使用這個網站製作字體的時候遇到的困難：1.忘記向量圖怎麼畫、2.工具要一個個試過才知道怎麼用、3.跟專業的向量圖軟體比起來還是少了很多功能、4.字到底要長怎樣，
+        不過這些問題都在研究一段時間後就一一解決了，畢竟其實也沒有要做多難的字型，大概知道一些基本概念就能完成了。
+        而且因為每個字母都會跟其他字母有相像的部分，所以會越做越快（有很多部分可以複製貼上），花費的時間其實沒有很多。
+        使用這個網站的好處是不需要安裝軟體、有字母表，完成之後還可以按幾個按鍵就輸出成三種檔案，非常方便。
+      </div>
+    </div>
+
+
+    <!-- ------------------------------------------------>
+    <div class="row hw12">
+      <div class="col-md-12 twenty">
+        <table>
+          <tr>
+            <th>總分</th>
+            <th>完成後打勾</th>
+            <th>配分</th>
+            <th>分項描述</th>
+          </tr>
+          <tr>
+            <td rowspan="4" id="myTotal"></td>
+            <td><input type="checkbox" class="flipswitch" id="myCheckbox1" checked="checked"></td>
+            <td id='m1'>1</td>
+            <td>數字 0~9</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="flipswitch" id="myCheckbox2" checked="checked"></td>
+            <td id='m2'>2</td>
+            <td>大寫字母 A~Z</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="flipswitch" id="myCheckbox3" checked="checked"></td>
+            <td id='m3'>3</td>
+            <td>小寫字母 a~z</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="flipswitch" id="myCheckbox4" checked="checked"></td>
+            <td id='m4'>4</td>
+            <td>所有符號</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- ------------------------------------------------>
+    <div class="row hw12">
+      <div class="col-md-12 twenty">
+        成果<br>
+        <span style="font-family: OFont; font-size: 40px;">
+          ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>
+          abcdefghijklmnopqrstuvwxyz<br>
+          0123456789<br>
+          !"#$%&'()*+,-./:;&lt;=&gt;?@[\]^_`{|}~<br>
+        </span>
+      </div>
+    </div>
+
+    <!-- ------------------------------------------------>
+    <div class="row hw12">
+      <div class="col-md-12 twenty">
+        靈感來源<br>
+        <img src="img/source.jpg"><br>
+        From: https://www.facebook.com/people/Nao-Taniyama-Associates/100035660066386/
+      </div>
+    </div>
+
+    <!-- ------------------------------------------------>
+    <div class="row hw12">
+      <div class="col-md-12 twenty">
+        偷打廣告
+        <input style="font-family: OFont; font-size: 30px; color: #BF69F4; background-color: #000000;" type="button" name="back" onclick="location.href='https://www.youtube.com/@FuwaMinato'" value="Fuwa Minato">
+      </div>
+    </div>
+
+    <!-- ------------------------------------------------>
+
+    <!-- ------------------------------------------------>
+
+
+  <script>
+    $(function() {
+      var f = function() {
+        $(this).next().text($(this).is(':checked') ? '做完' : '未做完');
+      };
+      $('input').change(f).trigger('change');
+    });
+
+    d3.select("#myCheckbox1").on("change",update);
+    d3.select("#myCheckbox2").on("change",update);
+    d3.select("#myCheckbox3").on("change",update);
+    d3.select("#myCheckbox4").on("change",update);
+
+
+    update();
+    
+    function update(){
+
+      var score = 0;
+
+      if (d3.select("#myCheckbox1").property("checked")){
+        score += parseInt(d3.select('#m1').html());
+      }
+
+      if (d3.select("#myCheckbox2").property("checked")){
+        score += parseInt(d3.select('#m2').html());   
+      }
+
+      if (d3.select("#myCheckbox3").property("checked")){
+        score += parseInt(d3.select('#m3').html());   
+      }
+
+      if (d3.select("#myCheckbox4").property("checked")){
+        score += parseInt(d3.select('#m4').html());   
+      }
+
+
+      d3.select("#myTotal").html(score);    
+    }
+  </script>
+
+  </body>
+</html>
